@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CARTA COBRANCA V2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.8531167061100033"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.definition"/>
+	<parameter name="PDIR_MODELO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="CODPARC" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[SELECT CONVERT(DATE,GETDATE(),103) AS DTHOJE
+     , TGFPAR.RAZAOSOCIAL AS RAZAOPARC
+	 , SANKHYA.FORMATAR_CPF_CNPJ(TGFPAR.CGC_CPF) AS CNPJPARC
+	 , UPPER(TSIEND.TIPO+' '+TSIEND.NOMEEND+','+TGFPAR.NUMEND+' '+TGFPAR.COMPLEMENTO+' - '+ TSIBAI.NOMEBAI) AS ENDERECOPARC
+	 , UPPER(TSICID.NOMECID+'/'+TSIUFS.UF) AS CIDADEPARC
+	 , SANKHYA.CTC_FORMATA_CEP(TGFPAR.CEP) AS CEPPARC
+	 , TSIEMP.RAZAOSOCIALCOMPLETA AS RAZAOEMP
+	 , SANKHYA.FORMATAR_CPF_CNPJ(TSIEMP.CGC) AS CNPJEMP
+	 , TGFFIN.NUMNOTA
+	 , TGFFIN.DTVENC
+	 , TGFFIN.VLRDESDOB
+	 , SUM(TGFFIN.VLRDESDOB) OVER() AS TOTALTIT
+           , SANKHYA.Extenso_Monetario ( SUM(TGFFIN.VLRDESDOB) OVER() ) AS VLREXTENSO
+           , TGFFIN.NUFIN
+           , TGFFIN.DESDOBRAMENTO
+  FROM SANKHYA.TGFFIN
+ INNER JOIN SANKHYA.TGFPAR ON TGFFIN.CODPARC = TGFPAR.CODPARC
+ INNER JOIN SANKHYA.TSIEND ON TGFPAR.CODEND = TSIEND.CODEND
+ INNER JOIN SANKHYA.TSIBAI ON TGFPAR.CODBAI = TSIBAI.CODBAI
+ INNER JOIN SANKHYA.TSICID ON TGFPAR.CODCID = TSICID.CODCID
+ INNER JOIN SANKHYA.TSIUFS ON TSICID.UF = TSIUFS.CODUF
+ INNER JOIN sankhya.TSIEMP ON TGFFIN.CODEMP = TSIEMP.CODEMP
+ WHERE TGFFIN.RECDESP = 1
+   AND TGFFIN.CODNAT = 10010104
+   AND TGFFIN.DHBAIXA IS NULL
+   AND DATEDIFF(DD,TGFFIN.DTVENC,GETDATE()) > 31
+   AND TGFFIN.CODPARC = $P{CODPARC}
+ORDER BY TGFFIN.DTVENC]]>
+	</queryString>
+	<field name="DTHOJE" class="java.sql.Date"/>
+	<field name="RAZAOPARC" class="java.lang.String"/>
+	<field name="CNPJPARC" class="java.lang.String"/>
+	<field name="ENDERECOPARC" class="java.lang.String"/>
+	<field name="CIDADEPARC" class="java.lang.String"/>
+	<field name="CEPPARC" class="java.lang.String"/>
+	<field name="RAZAOEMP" class="java.lang.String"/>
+	<field name="CNPJEMP" class="java.lang.String"/>
+	<field name="NUMNOTA" class="java.math.BigDecimal"/>
+	<field name="DTVENC" class="java.sql.Timestamp"/>
+	<field name="VLRDESDOB" class="java.math.BigDecimal"/>
+	<field name="TOTALTIT" class="java.math.BigDecimal"/>
+	<field name="VLREXTENSO" class="java.lang.String"/>
+	<field name="NUFIN" class="java.math.BigDecimal"/>
+	<field name="DESDOBRAMENTO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="27" width="555" height="22"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Belo Horizonte/MG, "+new SimpleDateFormat("dd/MM/yyyy").format($F{DTHOJE})+"."]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="0" y="0" width="106" height="27"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{PDIR_MODELO}+"Logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="555" height="36"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["<br>Ao Sr. Representante Legal de,<br><b>"+$F{RAZAOPARC}+" - CNPJ: "+$F{CNPJPARC}+" (\"NOTIFICADA\")</b><br>"+"Endereço: "+$F{ENDERECOPARC}+"<br>Cidade: "+$F{CIDADEPARC}+"<br>CEP: "+$F{CEPPARC}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="139" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="393" y="0" width="162" height="25"/>
+				<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="0">
+					<topPen lineWidth="1.5" lineStyle="Solid"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid"/>
+				</box>
+				<textElement markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["<b>Ref.: &nbsp &nbsp &nbsp &nbsp &nbsp FAZ: &nbsp &nbsp &nbsp &nbsp &nbsp</b> Notificação<br>Extrajudicial - COBRANÇA"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="25" width="555" height="94"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["<br>Prezado Sr. Representante Legal,<br><br>Na qualidade de empresa credora, "+$F{RAZAOEMP}+", inscrita CNPJ sob o nº "+$F{CNPJEMP}+", neste ato representada conforme previsto em seu Contrato Social, doravante denominada <b>NOTIFICANTE</b>, viemos pelo presente instrumento particular <b><u>NOTIFICAR EXTRAJUDICIALMENTE</u>, </b>"+$F{RAZAOPARC}+",pessoa jurídica de direito privado inscrita no CNPJ sob o nº "+$F{CNPJPARC}+", sediada na "+$F{ENDERECOPARC}+" "+$F{CIDADEPARC}+", doravante denominada <b>NOTIFICADA</b>, pelos fundamentos e fatos descritos abaixo: <br><br>1.	É de conhecimento da <b>NOTIFICADA</b> que foram adquiridos diversos produtos (calçados, bolsas e acessórios femininos) vendidos pela <b>NOTIFICANTE</b>, conforme notas fiscais relacionadas abaixo: "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="118" y="124" width="80" height="15"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro Nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="248" y="124" width="105" height="15"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Vencimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="353" y="124" width="80" height="15"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="198" y="124" width="50" height="15"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro Parc.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="118" y="0" width="80" height="15"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{NUMNOTA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="248" y="0" width="105" height="15"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{DTVENC}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="353" y="0" width="80" height="15"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VLRDESDOB}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="198" y="0" width="50" height="15"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DESDOBRAMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="91" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="0" width="555" height="91"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["<br>2.	Ocorre que, não foram localizados o(s) pagamento(s) em nossos sistemas até o presente momento, e, mesmo após inúmeros contatos, V.Sa. permanece inerte e inadimplente com suas obrigações, deixando a <b>NOTIFICANTE</b> sem alternativas senão a de notificá-la <b><u>ratificando</u></b> sua situação de inadimplência contratual, bem como a aplicação das penalidades constantes do art. 395 do Código Civil."+"<br><br> 3.	Assim, tem-se que o valor originalmente devido perfaz a quantia de &#82;&#36 "+new java.text.DecimalFormat("#,##0.00").format($F{TOTALTIT}) +" ("+$F{VLREXTENSO}+")"+", o qual será acrescido das devidas correções acima mencionadas."+"<br><br>4.	Desta forma, <b>NOTIFICAMOS EXTRAJUDICIALMENTE</b> V.Sa. sobre a sua atual situação de <b>INADIMPLÊNCIA</b>, convocando-a a realizar o pagamento dos referidos valores acima mencionados, no prazo <b>48 (quarenta e oito) horas</b>, sob pena de serem tomadas as medidas judiciais cabíveis à espécie."+"<br><br>5.	Diante do acima exposto, e certo da possibilidade da realização de uma composição amigável com V. Sa., aguardamos a quitação do débito no prazo supramencionado."+"<br><br>Lembramos ainda, que toda e qualquer comunicação deverá ser tratada com o Setor Financeiro da <b>NOTIFICANTE</b>, telefone de contato (31) 3238-4122, sob pena de imediata Execução. <br><br> Colocamos à sua disposição para quaisquer outros esclarecimentos,<br> <br> Atenciosamente, <br> <br> <br> <br> <br> <b>"+$F{RAZAOEMP}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
