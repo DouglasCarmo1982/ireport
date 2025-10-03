@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MAPA_COTACAO" language="groovy" pageWidth="1551" pageHeight="595" orientation="Landscape" columnWidth="1541" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5">
-	<property name="ireport.zoom" value="3.0052592036063106"/>
-	<property name="ireport.x" value="1500"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MAPA_COTACAO" language="groovy" pageWidth="1200" pageHeight="595" orientation="Landscape" columnWidth="1190" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5">
+	<property name="ireport.zoom" value="3.1384283767210035"/>
+	<property name="ireport.x" value="974"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.definition"/>
 	<parameter name="PDIR_MODELO" class="java.lang.String" isForPrompting="false"/>
@@ -20,10 +20,6 @@
 	 , FORN_2.NOMEPARC AS NOMEPARC_2
 	 , SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 3) AS CODPARC_3
 	 , FORN_3.NOMEPARC AS NOMEPARC_3
-	 , SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 4) AS CODPARC_4
-	 , FORN_4.NOMEPARC AS NOMEPARC_4
-	 , SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 5) AS CODPARC_5
-	 , FORN_5.NOMEPARC AS NOMEPARC_5
 	 , TGFITC.CODPROD
 	 , RTRIM(TGFPRO.DESCRPROD) + ' ' + TGFITC.CONTROLE AS DESCRPROD
 	 , TGFITC.CODVOL
@@ -80,40 +76,8 @@
 	 , ISNULL(FORN_3.AD_DIFALIQICMSINICIAL,FORN_3.DIFALIQICMS) AS DIFALINI_3
 	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_3.CODTIPVENDA,0)) AS CODTIPVENDA_3
 	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_3.AD_CODTIPVENDAINICIAL,FORN_3.CODTIPVENDA)) AS CODTIPVENDAINI_3
-	 , ISNULL(FORN_4.PRECO,0) AS PRECO_4
-     , ISNULL(FORN_4.PRECO,0)-ISNULL(FORN_4.VLRDESC,0) AS PRECO_NEG_4
-	 , ISNULL(FORN_4.QTDPARC,0) AS QTDPARC_4
-	 , ISNULL(FORN_4.PRAZOPARC,0) AS PRAZOPARC_4
-	 , ISNULL(FORN_4.PRAZOENTREGA,0) AS PRAZOENTREGA_4
-	 , ISNULL(FORN_4.VLRDESC,0) AS VLRDESC_4
-     , SANKHYA. F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_4.AD_FORMAPAGTO) AS FORMAPAGTO_4
-	 , CASE WHEN FORN_4.SITUACAO = 'A' THEN 1 ELSE 0 END AS SITUACAO_4
-	 , ISNULL(FORN_4.GARANTIA,'SEM GARANTIA') AS GARANTIA_4
-	 , ISNULL(FORN_4.AD_PRECOINICIAL,FORN_4.PRECO) AS PRECOINI_4
-	 , ISNULL(FORN_4.FRETE,0) AS FRETE_4
-	 , ISNULL(FORN_4.AD_FRETEINICIAL,FORN_4.FRETE) AS FRETEINI_4
-	 , ISNULL(FORN_4.DIFALIQICMS,0) AS DIFAL_4
-	 , ISNULL(FORN_4.AD_DIFALIQICMSINICIAL,FORN_4.DIFALIQICMS) AS DIFALINI_4
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_4.CODTIPVENDA,0)) AS CODTIPVENDA_4
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_4.AD_CODTIPVENDAINICIAL,FORN_4.CODTIPVENDA)) AS CODTIPVENDAINI_4
-	 , ISNULL(FORN_5.PRECO,0) AS PRECO_5
-     , ISNULL(FORN_5.PRECO,0)-ISNULL(FORN_5.VLRDESC,0) AS PRECO_NEG_5
-	 , ISNULL(FORN_5.QTDPARC,0) AS QTDPARC_5
-	 , ISNULL(FORN_5.PRAZOPARC,0) AS PRAZOPARC_5
-	 , ISNULL(FORN_5.PRAZOENTREGA,0) AS PRAZOENTREGA_5
-	 , ISNULL(FORN_5.VLRDESC,0) AS VLRDESC_5
-     , SANKHYA.F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_5.AD_FORMAPAGTO) AS FORMAPAGTO_5
-	 , CASE WHEN FORN_5.SITUACAO = 'A' THEN 1 ELSE 0 END AS SITUACAO_5
-	 , ISNULL(FORN_5.GARANTIA,'SEM GARANTIA') AS GARANTIA_5
-	 , ISNULL(FORN_5.AD_PRECOINICIAL,FORN_5.PRECO) AS PRECOINI_5
-	 , ISNULL(FORN_5.FRETE,0) AS FRETE_5
-	 , ISNULL(FORN_5.AD_FRETEINICIAL,FORN_5.FRETE) AS FRETEINI_5
-	 , ISNULL(FORN_5.DIFALIQICMS,0) AS DIFAL_5
-	 , ISNULL(FORN_5.AD_DIFALIQICMSINICIAL,FORN_5.DIFALIQICMS) AS DIFALINI_5
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_5.CODTIPVENDA,0)) AS CODTIPVENDA_5
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_5.AD_CODTIPVENDAINICIAL,FORN_5.CODTIPVENDA)) AS CODTIPVENDAINI_5
-     , LEAST(FORN_1.PRECO, FORN_2.PRECO, FORN_3.PRECO, FORN_4.PRECO, FORN_5.PRECO) AS MELHOR_PRECO
-	 , LEAST(FORN_1.PRECO-FORN_1.VLRDESC, FORN_2.PRECO-FORN_2.VLRDESC, FORN_3.PRECO-FORN_3.VLRDESC, FORN_4.PRECO-FORN_4.VLRDESC, FORN_5.PRECO-FORN_5.VLRDESC) AS MELHOR_PRECO_NEG
+     , LEAST(ISNULL(FORN_1.PRECO,0), ISNULL(FORN_2.PRECO,0), ISNULL(FORN_3.PRECO,0)) AS MELHOR_PRECO
+	 , LEAST(ISNULL(FORN_1.PRECO,0)-ISNULL(FORN_1.VLRDESC,0), ISNULL(FORN_2.PRECO,0)-ISNULL(FORN_2.VLRDESC,0), ISNULL(FORN_3.PRECO,0)-ISNULL(FORN_3.VLRDESC,0)) AS MELHOR_PRECO_NEG
 	 , TGFCOT.AD_DESCRDEMANDA AS DEMANDA
 	 , TGFCOT.AD_DESCRAPLICACAO AS APLICACAO
   FROM SANKHYA.TGFCOT (NOLOCK)
@@ -127,7 +91,6 @@
                    , TGFITC.CODPARC
 				   , TGFITC.NUMCOTACAO
 				   , TGFITC.CODPROD
-				   , TGFITC.CONTROLE
 				   , TGFPAR.NOMEPARC
 				   , CASE WHEN ISNULL(TGFITC.QTDPARCPAGT,0) = 0 THEN 1 ELSE TGFITC.QTDPARCPAGT END  AS QTDPARC
 				   , TGFITC.PRAZOPARC
@@ -145,12 +108,11 @@
 				   , TGFITC.AD_CODTIPVENDAINICIAL
                 FROM SANKHYA.TGFITC (NOLOCK)
 				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
-				WHERE TGFITC.CABECALHO = 'N') FORN_1 ON FORN_1.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_1.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 1) AND FORN_1.CODPROD = TGFITC.CODPROD AND FORN_1.CONTROLE = TGFITC.CONTROLE
+				WHERE TGFITC.CABECALHO = 'N') FORN_1 ON FORN_1.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_1.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 1) AND FORN_1.CODPROD = TGFITC.CODPROD
    LEFT JOIN (SELECT TGFITC.PRECO
                    , TGFITC.CODPARC
 				   , TGFITC.NUMCOTACAO
 				   , TGFITC.CODPROD
-				   , TGFITC.CONTROLE
 				   , TGFPAR.NOMEPARC
 				   , CASE WHEN ISNULL(TGFITC.QTDPARCPAGT,0) = 0 THEN 1 ELSE TGFITC.QTDPARCPAGT END  AS QTDPARC
 				   , TGFITC.PRAZOPARC
@@ -168,12 +130,11 @@
 				   , TGFITC.AD_CODTIPVENDAINICIAL
                 FROM SANKHYA.TGFITC (NOLOCK)
 				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
-				WHERE TGFITC.CABECALHO = 'N') FORN_2 ON FORN_2.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_2.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 2) AND FORN_2.CODPROD = TGFITC.CODPROD AND FORN_2.CONTROLE = TGFITC.CONTROLE
+				WHERE TGFITC.CABECALHO = 'N') FORN_2 ON FORN_2.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_2.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 2) AND FORN_2.CODPROD = TGFITC.CODPROD
    LEFT JOIN (SELECT TGFITC.PRECO
                    , TGFITC.CODPARC
 				   , TGFITC.NUMCOTACAO
 				   , TGFITC.CODPROD
-				   , TGFITC.CONTROLE
 				   , TGFPAR.NOMEPARC
 				   , CASE WHEN ISNULL(TGFITC.QTDPARCPAGT,0) = 0 THEN 1 ELSE TGFITC.QTDPARCPAGT END  AS QTDPARC
 				   , TGFITC.PRAZOPARC
@@ -191,53 +152,7 @@
 				   , TGFITC.AD_CODTIPVENDAINICIAL
                 FROM SANKHYA.TGFITC (NOLOCK)
 				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
-				WHERE TGFITC.CABECALHO = 'N') FORN_3 ON FORN_3.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_3.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 3) AND FORN_3.CODPROD = TGFITC.CODPROD AND FORN_3.CONTROLE = TGFITC.CONTROLE
-   LEFT JOIN (SELECT TGFITC.PRECO
-                   , TGFITC.CODPARC
-				   , TGFITC.NUMCOTACAO
-				   , TGFITC.CODPROD
-				   , TGFITC.CONTROLE
-				   , TGFPAR.NOMEPARC
-				   , CASE WHEN ISNULL(TGFITC.QTDPARCPAGT,0) = 0 THEN 1 ELSE TGFITC.QTDPARCPAGT END  AS QTDPARC
-				   , TGFITC.PRAZOPARC
-				   , TGFITC.PRAZOENTREGA
-				   , TGFITC.VLRDESC
-				   , TGFITC.AD_FORMAPAGTO
-				   , TGFITC.SITUACAO
-				   , CONVERT(VARCHAR,TGFITC.GARANTIA)+' DIAS' AS GARANTIA
-				   , TGFITC.AD_PRECOINICIAL
-				   , TGFITC.FRETE
-				   , TGFITC.AD_FRETEINICIAL
-				   , TGFITC.DIFALIQICMS
-				   , TGFITC.AD_DIFALIQICMSINICIAL
-				   , TGFITC.CODTIPVENDA
-				   , TGFITC.AD_CODTIPVENDAINICIAL
-                FROM SANKHYA.TGFITC (NOLOCK)
-				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
-				WHERE TGFITC.CABECALHO = 'N') FORN_4 ON FORN_4.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_4.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 4) AND FORN_4.CODPROD = TGFITC.CODPROD AND FORN_4.CONTROLE = TGFITC.CONTROLE
-    LEFT JOIN (SELECT TGFITC.PRECO
-                   , TGFITC.CODPARC
-				   , TGFITC.NUMCOTACAO
-				   , TGFITC.CODPROD
-				   , TGFITC.CONTROLE
-				   , TGFPAR.NOMEPARC
-				   , CASE WHEN ISNULL(TGFITC.QTDPARCPAGT,0) = 0 THEN 1 ELSE TGFITC.QTDPARCPAGT END  AS QTDPARC
-				   , TGFITC.PRAZOPARC
-				   , TGFITC.PRAZOENTREGA
-				   , TGFITC.VLRDESC
-				   , TGFITC.AD_FORMAPAGTO
-				   , TGFITC.SITUACAO
-				   , CONVERT(VARCHAR,TGFITC.GARANTIA)+' DIAS' AS GARANTIA
-				   , TGFITC.AD_PRECOINICIAL
-				   , TGFITC.FRETE
-				   , TGFITC.AD_FRETEINICIAL
-				   , TGFITC.DIFALIQICMS
-				   , TGFITC.AD_DIFALIQICMSINICIAL
-				   , TGFITC.CODTIPVENDA
-				   , TGFITC.AD_CODTIPVENDAINICIAL
-                FROM SANKHYA.TGFITC (NOLOCK)
-				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
-				WHERE TGFITC.CABECALHO = 'N') FORN_5 ON FORN_5.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_5.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 5) AND FORN_5.CODPROD = TGFITC.CODPROD AND FORN_5.CONTROLE = TGFITC.CONTROLE
+				WHERE TGFITC.CABECALHO = 'N') FORN_3 ON FORN_3.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_3.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 3) AND FORN_3.CODPROD = TGFITC.CODPROD
  WHERE TGFCOT.NUMCOTACAO = $P{PK_NUMCOTACAO}]]>
 	</queryString>
 	<field name="NUMCOTACAO" class="java.math.BigDecimal"/>
@@ -253,10 +168,6 @@
 	<field name="NOMEPARC_2" class="java.lang.String"/>
 	<field name="CODPARC_3" class="java.math.BigDecimal"/>
 	<field name="NOMEPARC_3" class="java.lang.String"/>
-	<field name="CODPARC_4" class="java.math.BigDecimal"/>
-	<field name="NOMEPARC_4" class="java.lang.String"/>
-	<field name="CODPARC_5" class="java.math.BigDecimal"/>
-	<field name="NOMEPARC_5" class="java.lang.String"/>
 	<field name="CODPROD" class="java.math.BigDecimal"/>
 	<field name="DESCRPROD" class="java.lang.String"/>
 	<field name="CODVOL" class="java.lang.String"/>
@@ -313,38 +224,6 @@
 	<field name="DIFALINI_3" class="java.math.BigDecimal"/>
 	<field name="CODTIPVENDA_3" class="java.lang.String"/>
 	<field name="CODTIPVENDAINI_3" class="java.lang.String"/>
-	<field name="PRECO_4" class="java.math.BigDecimal"/>
-	<field name="PRECO_NEG_4" class="java.math.BigDecimal"/>
-	<field name="QTDPARC_4" class="java.math.BigDecimal"/>
-	<field name="PRAZOPARC_4" class="java.lang.Short"/>
-	<field name="PRAZOENTREGA_4" class="java.lang.Short"/>
-	<field name="VLRDESC_4" class="java.math.BigDecimal"/>
-	<field name="FORMAPAGTO_4" class="java.lang.String"/>
-	<field name="SITUACAO_4" class="java.math.BigDecimal"/>
-	<field name="GARANTIA_4" class="java.lang.String"/>
-	<field name="PRECOINI_4" class="java.math.BigDecimal"/>
-	<field name="FRETE_4" class="java.math.BigDecimal"/>
-	<field name="FRETEINI_4" class="java.math.BigDecimal"/>
-	<field name="DIFAL_4" class="java.math.BigDecimal"/>
-	<field name="DIFALINI_4" class="java.math.BigDecimal"/>
-	<field name="CODTIPVENDA_4" class="java.lang.String"/>
-	<field name="CODTIPVENDAINI_4" class="java.lang.String"/>
-	<field name="PRECO_5" class="java.math.BigDecimal"/>
-	<field name="PRECO_NEG_5" class="java.math.BigDecimal"/>
-	<field name="QTDPARC_5" class="java.math.BigDecimal"/>
-	<field name="PRAZOPARC_5" class="java.lang.Short"/>
-	<field name="PRAZOENTREGA_5" class="java.lang.Short"/>
-	<field name="VLRDESC_5" class="java.math.BigDecimal"/>
-	<field name="FORMAPAGTO_5" class="java.lang.String"/>
-	<field name="SITUACAO_5" class="java.math.BigDecimal"/>
-	<field name="GARANTIA_5" class="java.lang.String"/>
-	<field name="PRECOINI_5" class="java.math.BigDecimal"/>
-	<field name="FRETE_5" class="java.math.BigDecimal"/>
-	<field name="FRETEINI_5" class="java.math.BigDecimal"/>
-	<field name="DIFAL_5" class="java.math.BigDecimal"/>
-	<field name="DIFALINI_5" class="java.math.BigDecimal"/>
-	<field name="CODTIPVENDA_5" class="java.lang.String"/>
-	<field name="CODTIPVENDAINI_5" class="java.lang.String"/>
 	<field name="MELHOR_PRECO" class="java.math.BigDecimal"/>
 	<field name="MELHOR_PRECO_NEG" class="java.math.BigDecimal"/>
 	<field name="DEMANDA" class="java.lang.String"/>
@@ -454,74 +333,13 @@
 	<variable name="V_TOT_ULT_CPA" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{QTDCOTADA}.multiply($F{ULTCPA_VLR})]]></variableExpression>
 	</variable>
-	<variable name="TOT_PRECO_INI_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECOINI_4}.multiply($F{QTDCOTADA})]]></variableExpression>
-	</variable>
-	<variable name="TOT_PRECO_INI_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECOINI_5}.multiply($F{QTDCOTADA})]]></variableExpression>
-	</variable>
-	<variable name="V_VLRTOT_PARC_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_NEG_4}.multiply($F{QTDCOTADA})]]></variableExpression>
-	</variable>
-	<variable name="V_VLRTOT_PARC_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_NEG_5}.multiply($F{QTDCOTADA})]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_VENC_PARC_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_4}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_4})]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_VENC_PARC_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_5}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_5})]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_DESC_PARC_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{PRECOINI_4}.subtract($F{PRECO_4})).multiply($F{SITUACAO_4})]]></variableExpression>
-		<initialValueExpression><![CDATA[]]></initialValueExpression>
-	</variable>
-	<variable name="V_TOT_DESC_PARC_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{PRECOINI_5}.subtract($F{PRECO_5})).multiply($F{SITUACAO_5})]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_FRETEINI_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{FRETEINI_4}]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_FRETEINI_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{FRETEINI_5}]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_FRETE_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{FRETE_4}]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_FRETE_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{FRETE_5}]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_DIFALINI_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{DIFALINI_4}]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_DIFALINI_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{DIFALINI_5}]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_DIFAL_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{DIFAL_4}]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_DIFAL_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{DIFAL_5}]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_VENC_FRETE_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$V{V_TOT_FRETE_4}.multiply($F{SITUACAO_4})]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_VENC_FRETE_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$V{V_TOT_FRETE_5}.multiply($F{SITUACAO_5})]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_VENC_DIFAL_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{DIFAL_4}.multiply($F{SITUACAO_4})]]></variableExpression>
-	</variable>
-	<variable name="V_TOT_VENC_DIFAL_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{DIFAL_5}.multiply($F{SITUACAO_5})]]></variableExpression>
-	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="1541" height="25" forecolor="#FFFFFF" backcolor="#000000"/>
+				<reportElement mode="Opaque" x="0" y="0" width="1190" height="25" forecolor="#FFFFFF" backcolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -534,7 +352,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="37" splitType="Stretch">
+		<band height="74" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="120" height="15"/>
 				<box rightPadding="5"/>
@@ -662,7 +480,7 @@
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{DT_COTACAO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="847" y="0" width="58" height="15"/>
+				<reportElement x="0" y="36" width="120" height="15"/>
 				<box rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
@@ -670,7 +488,7 @@
 				<text><![CDATA[DEMANDA]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="905" y="0" width="636" height="15"/>
+				<reportElement x="120" y="36" width="718" height="15"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -683,7 +501,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEMANDA}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="847" y="18" width="58" height="15"/>
+				<reportElement x="0" y="55" width="120" height="15"/>
 				<box rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
@@ -691,7 +509,7 @@
 				<text><![CDATA[APLICAÇÃO]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="905" y="18" width="636" height="15"/>
+				<reportElement x="120" y="55" width="718" height="15"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -868,7 +686,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMEPARC_3}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="1134" y="0" width="67" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="771" y="0" width="67" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -880,7 +698,7 @@
 				<text><![CDATA[MELHOR PREÇO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1134" y="15" width="67" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="771" y="15" width="67" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
 				<box leftPadding="3">
 					<leftPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
@@ -891,7 +709,7 @@
 				<text><![CDATA[(NEGOC)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1203" y="0" width="338" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="842" y="0" width="348" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -903,7 +721,7 @@
 				<text><![CDATA[ÚLTIMA COMPRA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1203" y="15" width="66" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="842" y="15" width="66" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.5"/>
@@ -915,7 +733,7 @@
 				<text><![CDATA[V.UNIT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1269" y="15" width="40" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="908" y="15" width="40" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
 				<box leftPadding="3">
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -926,7 +744,7 @@
 				<text><![CDATA[%]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1309" y="15" width="43" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="948" y="15" width="43" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
 				<box leftPadding="3">
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -937,7 +755,7 @@
 				<text><![CDATA[DT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1352" y="15" width="189" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="991" y="15" width="199" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
 				<box leftPadding="3">
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.5"/>
@@ -947,111 +765,26 @@
 				</textElement>
 				<text><![CDATA[FORNECEDOR]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="771" y="0" width="180" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMEPARC_4}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="771" y="15" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[V.INICIAL]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="831" y="15" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[V.NEGOCIADO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="891" y="15" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[V.TOTAL]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="951" y="0" width="181" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMEPARC_5}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="951" y="15" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<leftPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[V.INICIAL]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="1011" y="15" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[V.NEGOCIADO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="1071" y="15" width="61" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[V.TOTAL]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="15" splitType="Stretch">
 			<rectangle>
-				<reportElement mode="Opaque" x="1071" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
-					<printWhenExpression><![CDATA[$F{SITUACAO_5} == new BigDecimal(1)]]></printWhenExpression>
+				<reportElement mode="Opaque" x="651" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[($F{PRECO_NEG_3} != null && $F{MELHOR_PRECO_NEG} != null
+ && $F{PRECO_NEG_3}.compareTo($F{MELHOR_PRECO_NEG}) == 0)]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement mode="Opaque" x="892" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
-					<printWhenExpression><![CDATA[$F{SITUACAO_4} == new BigDecimal(1)]]></printWhenExpression>
+				<reportElement mode="Opaque" x="472" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[($F{PRECO_NEG_2} != null && $F{MELHOR_PRECO_NEG} != null
+ && $F{PRECO_NEG_2}.compareTo($F{MELHOR_PRECO_NEG}) == 0)]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement mode="Opaque" x="710" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
-					<printWhenExpression><![CDATA[$F{SITUACAO_3} == new BigDecimal(1)]]></printWhenExpression>
-				</reportElement>
-			</rectangle>
-			<rectangle>
-				<reportElement mode="Opaque" x="531" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
-					<printWhenExpression><![CDATA[$F{SITUACAO_2} == new BigDecimal(1)]]></printWhenExpression>
-				</reportElement>
-			</rectangle>
-			<rectangle>
-				<reportElement mode="Opaque" x="351" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
-					<printWhenExpression><![CDATA[$F{SITUACAO_1} == new BigDecimal(1)]]></printWhenExpression>
+				<reportElement mode="Opaque" x="291" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[($F{PRECO_NEG_1} != null && $F{MELHOR_PRECO_NEG} != null
+ && $F{PRECO_NEG_1}.compareTo($F{MELHOR_PRECO_NEG}) == 0)]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<textField pattern="#,##0.00">
@@ -1169,9 +902,8 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECOINI_3}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="1134" y="0" width="67" height="15"/>
+				<reportElement x="771" y="0" width="67" height="15"/>
 				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1180,7 +912,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MELHOR_PRECO_NEG}.multiply($F{QTDCOTADA})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="1204" y="0" width="65" height="15"/>
+				<reportElement x="843" y="0" width="65" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.5"/>
@@ -1192,7 +924,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ULTCPA_VLR}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
-				<reportElement x="1309" y="0" width="43" height="15"/>
+				<reportElement x="948" y="0" width="43" height="15"/>
 				<box leftPadding="3" rightPadding="3">
 					<leftPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
@@ -1203,7 +935,7 @@
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{ULTCPA_DTNEG}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="1352" y="0" width="189" height="15"/>
+				<reportElement x="991" y="0" width="198" height="15"/>
 				<box leftPadding="3" rightPadding="3">
 					<rightPen lineWidth="0.5"/>
 				</box>
@@ -1213,7 +945,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{ULTCPA_NOMEPARC}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement x="1269" y="0" width="40" height="15"/>
+				<reportElement x="908" y="0" width="40" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.5"/>
@@ -1228,74 +960,18 @@
         .multiply(new BigDecimal(100))
 ).setScale(2, BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="771" y="0" width="60" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECOINI_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="831" y="0" width="60" height="15"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="891" y="0" width="60" height="15"/>
-				<box rightPadding="3">
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_4}.multiply($F{QTDCOTADA})]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="951" y="0" width="60" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECOINI_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="1011" y="0" width="60" height="15"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="1071" y="0" width="60" height="15"/>
-				<box rightPadding="3">
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_5}.multiply($F{QTDCOTADA})]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 	<summary>
 		<band height="273" splitType="Stretch">
 			<rectangle>
-				<reportElement x="1277" y="81" width="75" height="60" forecolor="#CCFFCC" backcolor="#CCFFCC">
-					<printWhenExpression><![CDATA[($V{V_TOT_ULT_CPA}.subtract(($V{V_TOT_VENC_PARC_1}.subtract($V{V_TOT_DESC_PARC_1}).add($V{V_TOT_VENC_FRETE_1}).add($V{V_TOT_VENC_DIFAL_1})).add($V{V_TOT_VENC_PARC_2}.subtract($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_VENC_FRETE_2}).add($V{V_TOT_VENC_DIFAL_2})).add($V{V_TOT_VENC_PARC_3}.subtract($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_VENC_FRETE_3}).add($V{V_TOT_VENC_DIFAL_3})).add($V{V_TOT_VENC_PARC_4}.subtract($V{V_TOT_DESC_PARC_4}).add($V{V_TOT_VENC_FRETE_4}).add($V{V_TOT_VENC_DIFAL_4})).add($V{V_TOT_VENC_PARC_5}.subtract($V{V_TOT_DESC_PARC_5}).add($V{V_TOT_VENC_FRETE_5}).add($V{V_TOT_VENC_DIFAL_5})))).compareTo(BigDecimal.ZERO) > 0]]></printWhenExpression>
+				<reportElement x="909" y="81" width="78" height="60" forecolor="#CCFFCC" backcolor="#CCFFCC">
+					<printWhenExpression><![CDATA[($V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3})).compareTo(BigDecimal.ZERO) > 0]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="1277" y="162" width="75" height="45" forecolor="#CCFFCC" backcolor="#CCFFCC">
-					<printWhenExpression><![CDATA[($V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_DESC_PARC_4}).add($V{V_TOT_DESC_PARC_5})).compareTo(BigDecimal.ZERO) > 0]]></printWhenExpression>
+				<reportElement x="908" y="162" width="80" height="45" forecolor="#CCFFCC" backcolor="#CCFFCC">
+					<printWhenExpression><![CDATA[($V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3})).compareTo(BigDecimal.ZERO) > 0]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<staticText>
@@ -1371,7 +1047,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TOT_PRECO_INI_3}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Opaque" x="1134" y="0" width="67" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="771" y="0" width="67" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1542,7 +1218,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_3}.subtract($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_VENC_FRETE_3}).add($V{V_TOT_VENC_DIFAL_3})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="1134" y="66" width="67" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="771" y="66" width="67" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1554,7 +1230,7 @@
 				<text><![CDATA[TOTAL GERAL]]></text>
 			</staticText>
 			<textField pattern="¤ #,##0.00">
-				<reportElement mode="Opaque" x="1134" y="81" width="67" height="60" backcolor="#FF9933"/>
+				<reportElement mode="Opaque" x="771" y="81" width="67" height="60" backcolor="#FF9933"/>
 				<box rightPadding="3">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -1563,7 +1239,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[($V{V_TOT_VENC_PARC_1}.subtract($V{V_TOT_DESC_PARC_1}).add($V{V_TOT_VENC_FRETE_1}).add($V{V_TOT_VENC_DIFAL_1})).add($V{V_TOT_VENC_PARC_2}.subtract($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_VENC_FRETE_2}).add($V{V_TOT_VENC_DIFAL_2})).add($V{V_TOT_VENC_PARC_3}.subtract($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_VENC_FRETE_3}).add($V{V_TOT_VENC_DIFAL_3})).add($V{V_TOT_VENC_PARC_4}.subtract($V{V_TOT_DESC_PARC_4}).add($V{V_TOT_VENC_FRETE_4}).add($V{V_TOT_VENC_DIFAL_4})).add($V{V_TOT_VENC_PARC_5}.subtract($V{V_TOT_DESC_PARC_5}).add($V{V_TOT_VENC_FRETE_5}).add($V{V_TOT_VENC_DIFAL_5}))]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[($V{V_TOT_VENC_PARC_1}.subtract($V{V_TOT_DESC_PARC_1}).add($V{V_TOT_VENC_FRETE_1}).add($V{V_TOT_VENC_DIFAL_1})).add($V{V_TOT_VENC_PARC_2}.subtract($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_VENC_FRETE_2}).add($V{V_TOT_VENC_DIFAL_2})).add($V{V_TOT_VENC_PARC_3}.subtract($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_VENC_FRETE_3}).add($V{V_TOT_VENC_DIFAL_3}))]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="230" y="147" width="121" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
@@ -1674,7 +1350,7 @@
 				<text><![CDATA[	FORMA DE PAGTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="712" y="147" width="58" height="30" forecolor="#FFFFFF" backcolor="#333333"/>
+				<reportElement mode="Opaque" x="712" y="147" width="59" height="30" forecolor="#FFFFFF" backcolor="#333333"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1687,7 +1363,7 @@
 				<text><![CDATA[PRAZO ENTREGA]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="712" y="177" width="58" height="15"/>
+				<reportElement x="711" y="177" width="59" height="15"/>
 				<box rightPadding="3">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -1696,7 +1372,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRAZOENTREGA_3}+" DIAS"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRAZOENTREGA_2}+" DIAS"]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="592" y="177" width="61" height="15"/>
@@ -1711,7 +1387,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODTIPVENDAINI_3}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="1203" y="147" width="150" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<reportElement mode="Opaque" x="841" y="147" width="147" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1723,7 +1399,7 @@
 				<text><![CDATA[SAVING/PENALTY]]></text>
 			</staticText>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="1204" y="162" width="73" height="45"/>
+				<reportElement x="842" y="162" width="67" height="45"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1733,10 +1409,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_DESC_PARC_4}).add($V{V_TOT_DESC_PARC_5})]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1277" y="162" width="75" height="45"/>
+				<reportElement x="909" y="162" width="78" height="45"/>
 				<box rightPadding="3">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -1746,10 +1422,10 @@
 					<font size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[(
-    ($V{V_TOT_VENC_PARC_1}.add($V{V_TOT_VENC_PARC_2}).add($V{V_TOT_VENC_PARC_3}).add($V{V_TOT_VENC_PARC_4}).add($V{V_TOT_VENC_PARC_5}).compareTo(BigDecimal.ZERO) != 0)
-    ? ($V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_DESC_PARC_4}).add($V{V_TOT_DESC_PARC_5}))
+    ($V{V_TOT_VENC_PARC_1}.add($V{V_TOT_VENC_PARC_2}).add($V{V_TOT_VENC_PARC_3}).compareTo(BigDecimal.ZERO) != 0)
+    ? ($V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3}))
         .divide(
-            $V{V_TOT_VENC_PARC_1}.add($V{V_TOT_VENC_PARC_2}).add($V{V_TOT_VENC_PARC_3}).add($V{V_TOT_VENC_PARC_4}).add($V{V_TOT_VENC_PARC_5}),
+            $V{V_TOT_VENC_PARC_1}.add($V{V_TOT_VENC_PARC_2}).add($V{V_TOT_VENC_PARC_3}),
             BigDecimal.ROUND_HALF_UP
         )
         .multiply(new BigDecimal(-1))
@@ -1757,7 +1433,7 @@
 )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="207" width="1132" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
+				<reportElement mode="Opaque" x="0" y="214" width="839" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1769,7 +1445,7 @@
 				<text><![CDATA[OBSERVAÇÕES]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="1" y="229" width="1540" height="42"/>
+				<reportElement x="1" y="229" width="837" height="42"/>
 				<box topPadding="3" leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -2122,7 +1798,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="1203" y="66" width="150" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<reportElement mode="Opaque" x="841" y="66" width="147" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -2134,7 +1810,7 @@
 				<text><![CDATA[SAVING/PENALTY ÚLTIMA COMPRA]]></text>
 			</staticText>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="1204" y="81" width="73" height="60"/>
+				<reportElement x="842" y="81" width="67" height="60"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -2144,10 +1820,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_ULT_CPA}.subtract(($V{V_TOT_VENC_PARC_1}.subtract($V{V_TOT_DESC_PARC_1}).add($V{V_TOT_VENC_FRETE_1}).add($V{V_TOT_VENC_DIFAL_1})).add($V{V_TOT_VENC_PARC_2}.subtract($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_VENC_FRETE_2}).add($V{V_TOT_VENC_DIFAL_2})).add($V{V_TOT_VENC_PARC_3}.subtract($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_VENC_FRETE_3}).add($V{V_TOT_VENC_DIFAL_3})).add($V{V_TOT_VENC_PARC_4}.subtract($V{V_TOT_DESC_PARC_4}).add($V{V_TOT_VENC_FRETE_4}).add($V{V_TOT_VENC_DIFAL_4})).add($V{V_TOT_VENC_PARC_5}.subtract($V{V_TOT_DESC_PARC_5}).add($V{V_TOT_VENC_FRETE_5}).add($V{V_TOT_VENC_DIFAL_5})))]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1277" y="81" width="75" height="60"/>
+				<reportElement x="909" y="81" width="78" height="60"/>
 				<box rightPadding="3">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -2157,10 +1833,10 @@
 					<font size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[(
-    ($V{V_TOT_ULT_CPA}.compareTo(BigDecimal.ZERO) != 0)
-    ? $V{V_TOT_ULT_CPA}.subtract(($V{V_TOT_VENC_PARC_1}.subtract($V{V_TOT_DESC_PARC_1}).add($V{V_TOT_VENC_FRETE_1}).add($V{V_TOT_VENC_DIFAL_1})).add($V{V_TOT_VENC_PARC_2}.subtract($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_VENC_FRETE_2}).add($V{V_TOT_VENC_DIFAL_2})).add($V{V_TOT_VENC_PARC_3}.subtract($V{V_TOT_DESC_PARC_3}).add($V{V_TOT_VENC_FRETE_3}).add($V{V_TOT_VENC_DIFAL_3})).add($V{V_TOT_VENC_PARC_4}.subtract($V{V_TOT_DESC_PARC_4}).add($V{V_TOT_VENC_FRETE_4}).add($V{V_TOT_VENC_DIFAL_4})).add($V{V_TOT_VENC_PARC_5}.subtract($V{V_TOT_DESC_PARC_5}).add($V{V_TOT_VENC_FRETE_5}).add($V{V_TOT_VENC_DIFAL_5})))
+    ($V{V_TOT_VENC_PARC_1}.add($V{V_TOT_VENC_PARC_2}).add($V{V_TOT_VENC_PARC_3}).compareTo(BigDecimal.ZERO) != 0)
+    ? ($V{V_TOT_DESC_PARC_1}.add($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_DESC_PARC_3}))
         .divide(
-            $V{V_TOT_ULT_CPA},
+            $V{V_TOT_VENC_PARC_1}.add($V{V_TOT_VENC_PARC_2}).add($V{V_TOT_VENC_PARC_3}),
             BigDecimal.ROUND_HALF_UP
         )
         .multiply(new BigDecimal(-1))
@@ -2168,7 +1844,7 @@
 )]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Opaque" x="1204" y="0" width="65" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="842" y="0" width="66" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -2180,7 +1856,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_ULT_CPA}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Opaque" x="1269" y="0" width="40" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="908" y="0" width="40" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -2195,7 +1871,7 @@
 ).setScale(2, BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="1309" y="0" width="232" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="948" y="0" width="242" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -2304,7 +1980,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODTIPVENDA_2}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="653" y="177" width="59" height="15"/>
+				<reportElement x="653" y="177" width="58" height="15"/>
 				<box rightPadding="3">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -2314,493 +1990,6 @@
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODTIPVENDA_3}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="771" y="0" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TOT_PRECO_INI_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="831" y="0" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_VLRTOT_PARC_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="891" y="0" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="771" y="15" width="60" height="15" forecolor="#000000" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_FRETEINI_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="831" y="15" width="60" height="15" forecolor="#000000" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_FRETE_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="771" y="30" width="60" height="15" forecolor="#000000" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DIFALINI_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="831" y="30" width="60" height="15" forecolor="#000000" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DIFAL_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="771" y="45" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TOT_PRECO_INI_4}.add($V{V_TOT_FRETEINI_4}).add($V{V_TOT_DIFALINI_4})]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="831" y="45" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_VLRTOT_PARC_4}.add($V{V_TOT_FRETE_4}).add($V{V_TOT_DIFAL_4})]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="891" y="45" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="771" y="66" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="771" y="81" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DESC_PARC_4}
-]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="771" y="96" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_FRETE_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="771" y="111" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_DIFAL_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="771" y="126" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_4}.subtract($V{V_TOT_DESC_PARC_4}).add($V{V_TOT_VENC_FRETE_4}).add($V{V_TOT_VENC_DIFAL_4})]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="770" y="147" width="122" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[	FORMA DE PAGTO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="892" y="147" width="59" height="30" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PRAZO ENTREGA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="770" y="162" width="62" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DE]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="832" y="162" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PARA]]></text>
-			</staticText>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="770" y="177" width="62" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODTIPVENDAINI_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="832" y="177" width="60" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODTIPVENDA_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="892" y="177" width="59" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRAZOENTREGA_4}+" DIAS"]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="770" y="192" width="181" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{GARANTIA_4}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="951" y="0" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TOT_PRECO_INI_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="1011" y="0" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_VLRTOT_PARC_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="1071" y="0" width="61" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3">
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="951" y="15" width="60" height="15" forecolor="#000000" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_FRETEINI_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="1011" y="15" width="60" height="15" forecolor="#000000" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_FRETE_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="951" y="30" width="60" height="15" forecolor="#000000" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DIFALINI_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="1011" y="30" width="60" height="15" forecolor="#000000" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DIFAL_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="951" y="45" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TOT_PRECO_INI_5}.add($V{V_TOT_FRETEINI_5}).add($V{V_TOT_DIFALINI_5})]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="1011" y="45" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_VLRTOT_PARC_5}.add($V{V_TOT_FRETE_5}).add($V{V_TOT_DIFAL_5})]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="1071" y="45" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box rightPadding="3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="951" y="66" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="951" y="81" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DESC_PARC_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="951" y="96" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_FRETE_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="951" y="111" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_DIFAL_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="951" y="126" width="180" height="15"/>
-				<box rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_5}.subtract($V{V_TOT_DESC_PARC_5}).add($V{V_TOT_VENC_FRETE_5}).add($V{V_TOT_VENC_DIFAL_5})]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Opaque" x="951" y="147" width="122" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[	FORMA DE PAGTO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="1073" y="147" width="59" height="30" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PRAZO ENTREGA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="951" y="162" width="62" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DE]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="1013" y="162" width="60" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PARA]]></text>
-			</staticText>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="951" y="177" width="62" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODTIPVENDAINI_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="1013" y="177" width="60" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODTIPVENDA_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="951" y="192" width="180" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{GARANTIA_5}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="1073" y="177" width="58" height="15"/>
-				<box rightPadding="3">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRAZOENTREGA_5}+" DIAS"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

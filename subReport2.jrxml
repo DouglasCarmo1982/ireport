@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OmnichannelTituloSubReport" language="groovy" pageWidth="890" pageHeight="595" orientation="Landscape" columnWidth="890" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.definition"/>
+	<parameter name="PDIR_MODELO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="CODLOJA" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="DTFIN" class="java.sql.Timestamp" isForPrompting="false">
+		<parameterDescription><![CDATA[Data Final]]></parameterDescription>
+	</parameter>
+	<parameter name="DTINI" class="java.sql.Timestamp" isForPrompting="false">
+		<parameterDescription><![CDATA[Data Inicial]]></parameterDescription>
+	</parameter>
+	<parameter name="RECEBIMENTO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SINTETICO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\julio\\Desktop\\Meus Projetos\\Realorios Formatados\\Resumo Omnichannel\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM DUAL]]>
+	</queryString>
+	<field name="CODIGO" class="java.lang.Integer"/>
+	<title>
+		<band height="41">
+			<textField>
+				<reportElement x="92" y="0" width="593" height="41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single" markup="none">
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{RECEBIMENTO}.equals("S") ? "Recebimentos E-Commerce" :
+$P{SINTETICO}.equals("S") ? "Vendas E-Commerce Sintético" :
+"Vendas E-Commerce Analítico"]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="92" height="41"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{PDIR_MODELO}+"Logo.jpg"]]></imageExpression>
+			</image>
+			<image vAlign="Middle">
+				<reportElement x="685" y="0" width="205" height="41"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{PDIR_MODELO}+"CTC-DIGITAL.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="71">
+			<elementGroup>
+				<subreport>
+					<reportElement key="Detalhamento Transações Pagar-Me" x="0" y="0" width="890" height="67" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="CODLOJA">
+						<subreportParameterExpression><![CDATA[$P{CODLOJA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RECEBIMENTO">
+						<subreportParameterExpression><![CDATA[$P{RECEBIMENTO}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="DTFIN">
+						<subreportParameterExpression><![CDATA[$P{DTFIN}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="DTINI">
+						<subreportParameterExpression><![CDATA[$P{DTINI}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SINTETICO">
+						<subreportParameterExpression><![CDATA[$P{SINTETICO}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="PDIR_MODELO">
+						<subreportParameterExpression><![CDATA[$P{PDIR_MODELO}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "VENDAS E-COMMERCE_EXCEL.jasper"]]></subreportExpression>
+				</subreport>
+			</elementGroup>
+		</band>
+	</detail>
+</jasperReport>
