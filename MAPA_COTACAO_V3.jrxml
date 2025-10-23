@@ -38,64 +38,64 @@
 	 , ISNULL(FORN_1.PRAZOPARC,0) AS PRAZOPARC_1
 	 , ISNULL(FORN_1.PRAZOENTREGA,0) AS PRAZOENTREGA_1
 	 , ISNULL(FORN_1.VLRDESC,0) AS VLRDESC_1
-	 , SANKHYA. F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_1.AD_FORMAPAGTO) AS FORMAPAGTO_1
+	 , SANKHYA.F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_1.AD_FORMAPAGTO) AS FORMAPAGTO_1
 	 , CASE WHEN FORN_1.SITUACAO = 'A' THEN 1 ELSE 0 END AS SITUACAO_1
 	 , ISNULL(FORN_1.GARANTIA,'SEM GARANTIA') AS GARANTIA_1
-	 , ISNULL(FORN_1.AD_PRECOINICIAL,FORN_1.PRECO) AS PRECOINI_1
+	 , ISNULL(ISNULL(FORN_1.AD_PRECOINICIAL,FORN_1.PRECO),0) AS PRECOINI_1
 	 , ISNULL(FORN_1.FRETE,0) AS FRETE_1
-	 , ISNULL(FORN_1.AD_FRETEINICIAL,FORN_1.FRETE) AS FRETEINI_1
+	 , ISNULL(ISNULL(FORN_1.AD_FRETEINICIAL,FORN_1.FRETE),0) AS FRETEINI_1
 	 , ISNULL(FORN_1.DIFALIQICMS,0) AS DIFAL_1
-	 , ISNULL(FORN_1.AD_DIFALIQICMSINICIAL,FORN_1.DIFALIQICMS) AS DIFALINI_1
+	 , ISNULL(ISNULL(FORN_1.AD_DIFALIQICMSINICIAL,FORN_1.DIFALIQICMS),0) AS DIFALINI_1
 	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_1.CODTIPVENDA,0)) AS CODTIPVENDA_1
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_1.AD_CODTIPVENDAINICIAL,FORN_1.CODTIPVENDA)) AS CODTIPVENDAINI_1
+	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(ISNULL(FORN_1.AD_CODTIPVENDAINICIAL,FORN_1.CODTIPVENDA),0)) AS CODTIPVENDAINI_1
 	 , ISNULL(FORN_2.PRECO,0) AS PRECO_2
 	 , ISNULL(FORN_2.PRECO,0)-ISNULL(FORN_2.VLRDESC,0) AS PRECO_NEG_2
 	 , ISNULL(FORN_2.QTDPARC,0) AS QTDPARC_2
 	 , ISNULL(FORN_2.PRAZOPARC,0) AS PRAZOPARC_2
 	 , ISNULL(FORN_2.PRAZOENTREGA,0) AS PRAZOENTREGA_2
 	 , ISNULL(FORN_2.VLRDESC,0) AS VLRDESC_2
-	 , SANKHYA. F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_2.AD_FORMAPAGTO) AS FORMAPAGTO_2
+	 , SANKHYA.F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_2.AD_FORMAPAGTO) AS FORMAPAGTO_2
 	 , CASE WHEN FORN_2.SITUACAO = 'A' THEN 1 ELSE 0 END AS SITUACAO_2
 	 , ISNULL(FORN_2.GARANTIA,'SEM GARANTIA') AS GARANTIA_2
-	 , ISNULL(FORN_2.AD_PRECOINICIAL,FORN_2.PRECO) AS PRECOINI_2
+	 , ISNULL(ISNULL(FORN_2.AD_PRECOINICIAL,FORN_2.PRECO),0) AS PRECOINI_2
 	 , ISNULL(FORN_2.FRETE,0) AS FRETE_2
-	 , ISNULL(FORN_2.AD_FRETEINICIAL,FORN_2.FRETE) AS FRETEINI_2
+	 , ISNULL(ISNULL(FORN_2.AD_FRETEINICIAL,FORN_2.FRETE),0) AS FRETEINI_2
 	 , ISNULL(FORN_2.DIFALIQICMS,0) AS DIFAL_2
-	 , ISNULL(FORN_2.AD_DIFALIQICMSINICIAL,FORN_2.DIFALIQICMS) AS DIFALINI_2
+	 , ISNULL(ISNULL(FORN_2.AD_DIFALIQICMSINICIAL,FORN_2.DIFALIQICMS),0) AS DIFALINI_2
 	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_2.CODTIPVENDA,0)) AS CODTIPVENDA_2
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_2.AD_CODTIPVENDAINICIAL,FORN_2.CODTIPVENDA)) AS CODTIPVENDAINI_2
+	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(ISNULL(FORN_2.AD_CODTIPVENDAINICIAL,FORN_2.CODTIPVENDA),0)) AS CODTIPVENDAINI_2
 	 , ISNULL(FORN_3.PRECO,0) AS PRECO_3
      , ISNULL(FORN_3.PRECO,0)-ISNULL(FORN_3.VLRDESC,0) AS PRECO_NEG_3
 	 , ISNULL(FORN_3.QTDPARC,0) AS QTDPARC_3
 	 , ISNULL(FORN_3.PRAZOPARC,0) AS PRAZOPARC_3
 	 , ISNULL(FORN_3.PRAZOENTREGA,0) AS PRAZOENTREGA_3
 	 , ISNULL(FORN_3.VLRDESC,0) AS VLRDESC_3
-     , SANKHYA. F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_3.AD_FORMAPAGTO) AS FORMAPAGTO_3
+     , SANKHYA.F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_3.AD_FORMAPAGTO) AS FORMAPAGTO_3
 	 , CASE WHEN FORN_3.SITUACAO = 'A' THEN 1 ELSE 0 END AS SITUACAO_3
 	 , ISNULL(FORN_3.GARANTIA,'SEM GARANTIA') AS GARANTIA_3
-	 , ISNULL(FORN_3.AD_PRECOINICIAL,FORN_3.PRECO) AS PRECOINI_3
+	 , ISNULL(ISNULL(FORN_3.AD_PRECOINICIAL,FORN_3.PRECO),0) AS PRECOINI_3
 	 , ISNULL(FORN_3.FRETE,0) AS FRETE_3
-	 , ISNULL(FORN_3.AD_FRETEINICIAL,FORN_3.FRETE) AS FRETEINI_3
+	 , ISNULL(ISNULL(FORN_3.AD_FRETEINICIAL,FORN_3.FRETE),0) AS FRETEINI_3
 	 , ISNULL(FORN_3.DIFALIQICMS,0) AS DIFAL_3
-	 , ISNULL(FORN_3.AD_DIFALIQICMSINICIAL,FORN_3.DIFALIQICMS) AS DIFALINI_3
+	 , ISNULL(ISNULL(FORN_3.AD_DIFALIQICMSINICIAL,FORN_3.DIFALIQICMS),0) AS DIFALINI_3
 	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_3.CODTIPVENDA,0)) AS CODTIPVENDA_3
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_3.AD_CODTIPVENDAINICIAL,FORN_3.CODTIPVENDA)) AS CODTIPVENDAINI_3
+	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(ISNULL(FORN_3.AD_CODTIPVENDAINICIAL,FORN_3.CODTIPVENDA),0)) AS CODTIPVENDAINI_3
 	 , ISNULL(FORN_4.PRECO,0) AS PRECO_4
      , ISNULL(FORN_4.PRECO,0)-ISNULL(FORN_4.VLRDESC,0) AS PRECO_NEG_4
 	 , ISNULL(FORN_4.QTDPARC,0) AS QTDPARC_4
 	 , ISNULL(FORN_4.PRAZOPARC,0) AS PRAZOPARC_4
 	 , ISNULL(FORN_4.PRAZOENTREGA,0) AS PRAZOENTREGA_4
 	 , ISNULL(FORN_4.VLRDESC,0) AS VLRDESC_4
-     , SANKHYA. F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_4.AD_FORMAPAGTO) AS FORMAPAGTO_4
+     , SANKHYA.F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_4.AD_FORMAPAGTO) AS FORMAPAGTO_4
 	 , CASE WHEN FORN_4.SITUACAO = 'A' THEN 1 ELSE 0 END AS SITUACAO_4
 	 , ISNULL(FORN_4.GARANTIA,'SEM GARANTIA') AS GARANTIA_4
-	 , ISNULL(FORN_4.AD_PRECOINICIAL,FORN_4.PRECO) AS PRECOINI_4
+	 , ISNULL(ISNULL(FORN_4.AD_PRECOINICIAL,FORN_4.PRECO),0) AS PRECOINI_4
 	 , ISNULL(FORN_4.FRETE,0) AS FRETE_4
-	 , ISNULL(FORN_4.AD_FRETEINICIAL,FORN_4.FRETE) AS FRETEINI_4
+	 , ISNULL(ISNULL(FORN_4.AD_FRETEINICIAL,FORN_4.FRETE),0) AS FRETEINI_4
 	 , ISNULL(FORN_4.DIFALIQICMS,0) AS DIFAL_4
-	 , ISNULL(FORN_4.AD_DIFALIQICMSINICIAL,FORN_4.DIFALIQICMS) AS DIFALINI_4
+	 , ISNULL(ISNULL(FORN_4.AD_DIFALIQICMSINICIAL,FORN_4.DIFALIQICMS),0) AS DIFALINI_4
 	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_4.CODTIPVENDA,0)) AS CODTIPVENDA_4
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_4.AD_CODTIPVENDAINICIAL,FORN_4.CODTIPVENDA)) AS CODTIPVENDAINI_4
+	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(ISNULL(FORN_4.AD_CODTIPVENDAINICIAL,FORN_4.CODTIPVENDA),0)) AS CODTIPVENDAINI_4
 	 , ISNULL(FORN_5.PRECO,0) AS PRECO_5
      , ISNULL(FORN_5.PRECO,0)-ISNULL(FORN_5.VLRDESC,0) AS PRECO_NEG_5
 	 , ISNULL(FORN_5.QTDPARC,0) AS QTDPARC_5
@@ -105,13 +105,13 @@
      , SANKHYA.F_DESCROPC('TGFITC','AD_FORMAPAGTO',FORN_5.AD_FORMAPAGTO) AS FORMAPAGTO_5
 	 , CASE WHEN FORN_5.SITUACAO = 'A' THEN 1 ELSE 0 END AS SITUACAO_5
 	 , ISNULL(FORN_5.GARANTIA,'SEM GARANTIA') AS GARANTIA_5
-	 , ISNULL(FORN_5.AD_PRECOINICIAL,FORN_5.PRECO) AS PRECOINI_5
+	 , ISNULL(ISNULL(FORN_5.AD_PRECOINICIAL,FORN_5.PRECO),0) AS PRECOINI_5
 	 , ISNULL(FORN_5.FRETE,0) AS FRETE_5
-	 , ISNULL(FORN_5.AD_FRETEINICIAL,FORN_5.FRETE) AS FRETEINI_5
+	 , ISNULL(ISNULL(FORN_5.AD_FRETEINICIAL,FORN_5.FRETE),0) AS FRETEINI_5
 	 , ISNULL(FORN_5.DIFALIQICMS,0) AS DIFAL_5
-	 , ISNULL(FORN_5.AD_DIFALIQICMSINICIAL,FORN_5.DIFALIQICMS) AS DIFALINI_5
+	 , ISNULL(ISNULL(FORN_5.AD_DIFALIQICMSINICIAL,FORN_5.DIFALIQICMS),0) AS DIFALINI_5
 	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_5.CODTIPVENDA,0)) AS CODTIPVENDA_5
-	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(FORN_5.AD_CODTIPVENDAINICIAL,FORN_5.CODTIPVENDA)) AS CODTIPVENDAINI_5
+	 , (SELECT MAX(RTRIM(DESCRTIPVENDA)) FROM SANKHYA.TGFTPV (NOLOCK) WHERE CODTIPVENDA = ISNULL(ISNULL(FORN_5.AD_CODTIPVENDAINICIAL,FORN_5.CODTIPVENDA),0)) AS CODTIPVENDAINI_5
      , LEAST(FORN_1.PRECO, FORN_2.PRECO, FORN_3.PRECO, FORN_4.PRECO, FORN_5.PRECO) AS MELHOR_PRECO
 	 , LEAST(FORN_1.PRECO-FORN_1.VLRDESC, FORN_2.PRECO-FORN_2.VLRDESC, FORN_3.PRECO-FORN_3.VLRDESC, FORN_4.PRECO-FORN_4.VLRDESC, FORN_5.PRECO-FORN_5.VLRDESC) AS MELHOR_PRECO_NEG
 	 , TGFCOT.AD_DESCRDEMANDA AS DEMANDA
@@ -123,7 +123,7 @@
   INNER JOIN SANKHYA.TGFITC (NOLOCK) ON TGFCOT.NUMCOTACAO = TGFITC.NUMCOTACAO AND CABECALHO = 'S'
   INNER JOIN SANKHYA.TGFPRO (NOLOCK) ON TGFITC.CODPROD = TGFPRO.CODPROD
   INNER JOIN SANKHYA.TCSPRJ (NOLOCK) ON TGFCOT.CODPROJ = TCSPRJ.CODPROJ
-   LEFT JOIN (SELECT TGFITC.PRECO
+   LEFT JOIN (SELECT TGFITC.PRECO+TGFITC.IPI AS PRECO
                    , TGFITC.CODPARC
 				   , TGFITC.NUMCOTACAO
 				   , TGFITC.CODPROD
@@ -136,7 +136,7 @@
 				   , TGFITC.AD_FORMAPAGTO
 				   , TGFITC.SITUACAO
 				   , CONVERT(VARCHAR,TGFITC.GARANTIA)+' DIAS' AS GARANTIA
-				   , TGFITC.AD_PRECOINICIAL
+				   , TGFITC.AD_PRECOINICIAL+TGFITC.IPI AS AD_PRECOINICIAL
 				   , TGFITC.FRETE
 				   , TGFITC.AD_FRETEINICIAL
 				   , TGFITC.DIFALIQICMS
@@ -146,7 +146,7 @@
                 FROM SANKHYA.TGFITC (NOLOCK)
 				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
 				WHERE TGFITC.CABECALHO = 'N') FORN_1 ON FORN_1.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_1.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 1) AND FORN_1.CODPROD = TGFITC.CODPROD AND FORN_1.CONTROLE = TGFITC.CONTROLE
-   LEFT JOIN (SELECT TGFITC.PRECO
+   LEFT JOIN (SELECT TGFITC.PRECO+TGFITC.IPI AS PRECO
                    , TGFITC.CODPARC
 				   , TGFITC.NUMCOTACAO
 				   , TGFITC.CODPROD
@@ -159,7 +159,7 @@
 				   , TGFITC.AD_FORMAPAGTO
 				   , TGFITC.SITUACAO
 				   , CONVERT(VARCHAR,TGFITC.GARANTIA)+' DIAS' AS GARANTIA
-				   , TGFITC.AD_PRECOINICIAL
+				   , TGFITC.AD_PRECOINICIAL+TGFITC.IPI AS AD_PRECOINICIAL
 				   , TGFITC.FRETE
 				   , TGFITC.AD_FRETEINICIAL
 				   , TGFITC.DIFALIQICMS
@@ -169,7 +169,7 @@
                 FROM SANKHYA.TGFITC (NOLOCK)
 				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
 				WHERE TGFITC.CABECALHO = 'N') FORN_2 ON FORN_2.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_2.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 2) AND FORN_2.CODPROD = TGFITC.CODPROD AND FORN_2.CONTROLE = TGFITC.CONTROLE
-   LEFT JOIN (SELECT TGFITC.PRECO
+   LEFT JOIN (SELECT TGFITC.PRECO+TGFITC.IPI AS PRECO
                    , TGFITC.CODPARC
 				   , TGFITC.NUMCOTACAO
 				   , TGFITC.CODPROD
@@ -182,7 +182,7 @@
 				   , TGFITC.AD_FORMAPAGTO
 				   , TGFITC.SITUACAO
 				   , CONVERT(VARCHAR,TGFITC.GARANTIA)+' DIAS' AS GARANTIA
-				   , TGFITC.AD_PRECOINICIAL
+				   , TGFITC.AD_PRECOINICIAL+TGFITC.IPI AS AD_PRECOINICIAL
 				   , TGFITC.FRETE
 				   , TGFITC.AD_FRETEINICIAL
 				   , TGFITC.DIFALIQICMS
@@ -192,7 +192,7 @@
                 FROM SANKHYA.TGFITC (NOLOCK)
 				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
 				WHERE TGFITC.CABECALHO = 'N') FORN_3 ON FORN_3.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_3.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 3) AND FORN_3.CODPROD = TGFITC.CODPROD AND FORN_3.CONTROLE = TGFITC.CONTROLE
-   LEFT JOIN (SELECT TGFITC.PRECO
+   LEFT JOIN (SELECT TGFITC.PRECO+TGFITC.IPI AS PRECO
                    , TGFITC.CODPARC
 				   , TGFITC.NUMCOTACAO
 				   , TGFITC.CODPROD
@@ -205,7 +205,7 @@
 				   , TGFITC.AD_FORMAPAGTO
 				   , TGFITC.SITUACAO
 				   , CONVERT(VARCHAR,TGFITC.GARANTIA)+' DIAS' AS GARANTIA
-				   , TGFITC.AD_PRECOINICIAL
+				   , TGFITC.AD_PRECOINICIAL+TGFITC.IPI AS AD_PRECOINICIAL
 				   , TGFITC.FRETE
 				   , TGFITC.AD_FRETEINICIAL
 				   , TGFITC.DIFALIQICMS
@@ -215,7 +215,7 @@
                 FROM SANKHYA.TGFITC (NOLOCK)
 				INNER JOIN SANKHYA.TGFPAR (NOLOCK) ON TGFITC.CODPARC = TGFPAR.CODPARC
 				WHERE TGFITC.CABECALHO = 'N') FORN_4 ON FORN_4.NUMCOTACAO = TGFCOT.NUMCOTACAO AND FORN_4.CODPARC = SANKHYA.FN_TOP_FOR_COTACAO(TGFCOT.NUMCOTACAO, 4) AND FORN_4.CODPROD = TGFITC.CODPROD AND FORN_4.CONTROLE = TGFITC.CONTROLE
-    LEFT JOIN (SELECT TGFITC.PRECO
+    LEFT JOIN (SELECT TGFITC.PRECO+TGFITC.IPI AS PRECO
                    , TGFITC.CODPARC
 				   , TGFITC.NUMCOTACAO
 				   , TGFITC.CODPROD
@@ -228,7 +228,7 @@
 				   , TGFITC.AD_FORMAPAGTO
 				   , TGFITC.SITUACAO
 				   , CONVERT(VARCHAR,TGFITC.GARANTIA)+' DIAS' AS GARANTIA
-				   , TGFITC.AD_PRECOINICIAL
+				   , TGFITC.AD_PRECOINICIAL+TGFITC.IPI AS AD_PRECOINICIAL
 				   , TGFITC.FRETE
 				   , TGFITC.AD_FRETEINICIAL
 				   , TGFITC.DIFALIQICMS
@@ -380,22 +380,22 @@
 		<variableExpression><![CDATA[$F{PRECO_NEG_3}.multiply($F{QTDCOTADA})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_VENC_PARC_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_1}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_1})]]></variableExpression>
+		<variableExpression><![CDATA[$F{PRECOINI_1}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_1})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_DESC_PARC_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{PRECOINI_1}.subtract($F{PRECO_1})).multiply($F{SITUACAO_1})]]></variableExpression>
+		<variableExpression><![CDATA[($F{PRECOINI_1}.subtract($F{PRECO_1})).multiply($F{SITUACAO_1}).multiply($F{QTDCOTADA})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_VENC_PARC_2" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_2}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_2})]]></variableExpression>
+		<variableExpression><![CDATA[$F{PRECOINI_2}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_2})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_DESC_PARC_2" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{PRECOINI_2}.subtract($F{PRECO_2})).multiply($F{SITUACAO_2})]]></variableExpression>
+		<variableExpression><![CDATA[($F{PRECOINI_2}.subtract($F{PRECO_2})).multiply($F{SITUACAO_2}).multiply($F{QTDCOTADA})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_VENC_PARC_3" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_3}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_3})]]></variableExpression>
+		<variableExpression><![CDATA[$F{PRECOINI_3}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_3})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_DESC_PARC_3" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{PRECOINI_3}.subtract($F{PRECO_3})).multiply($F{SITUACAO_3})]]></variableExpression>
+		<variableExpression><![CDATA[($F{PRECOINI_3}.subtract($F{PRECO_3})).multiply($F{SITUACAO_3}).multiply($F{QTDCOTADA})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_FRETEINI_1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{FRETEINI_1}]]></variableExpression>
@@ -467,17 +467,17 @@
 		<variableExpression><![CDATA[$F{PRECO_NEG_5}.multiply($F{QTDCOTADA})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_VENC_PARC_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_4}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_4})]]></variableExpression>
+		<variableExpression><![CDATA[$F{PRECOINI_4}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_4})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_VENC_PARC_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{PRECO_5}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_5})]]></variableExpression>
+		<variableExpression><![CDATA[$F{PRECOINI_5}.multiply($F{QTDCOTADA}).multiply($F{SITUACAO_5})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_DESC_PARC_4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{PRECOINI_4}.subtract($F{PRECO_4})).multiply($F{SITUACAO_4})]]></variableExpression>
+		<variableExpression><![CDATA[($F{PRECOINI_4}.subtract($F{PRECO_4})).multiply($F{SITUACAO_4}).multiply($F{QTDCOTADA})]]></variableExpression>
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
 	<variable name="V_TOT_DESC_PARC_5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{PRECOINI_5}.subtract($F{PRECO_5})).multiply($F{SITUACAO_5})]]></variableExpression>
+		<variableExpression><![CDATA[($F{PRECOINI_5}.subtract($F{PRECO_5})).multiply($F{SITUACAO_5}).multiply($F{QTDCOTADA})]]></variableExpression>
 	</variable>
 	<variable name="V_TOT_FRETEINI_4" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{FRETEINI_4}]]></variableExpression>
@@ -779,7 +779,7 @@
 				</textElement>
 				<text><![CDATA[V.TOTAL]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement mode="Opaque" x="231" y="0" width="180" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -809,7 +809,7 @@
 				</textElement>
 				<text><![CDATA[V.NEGOCIADO]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement mode="Opaque" x="411" y="0" width="180" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -855,7 +855,7 @@
 				</textElement>
 				<text><![CDATA[V.TOTAL]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement mode="Opaque" x="591" y="0" width="180" height="15" forecolor="#FFFFFF" backcolor="#333333"/>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1030,31 +1030,31 @@
 	<detail>
 		<band height="15" splitType="Stretch">
 			<rectangle>
-				<reportElement mode="Opaque" x="1071" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
+				<reportElement mode="Opaque" x="1071" y="0" width="60" height="15" forecolor="#FFFF33" backcolor="#FFFF33">
 					<printWhenExpression><![CDATA[$F{SITUACAO_5} != null && $F{SITUACAO_5}.compareTo(new BigDecimal(1)) == 0]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement mode="Opaque" x="892" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
+				<reportElement mode="Opaque" x="892" y="0" width="60" height="15" forecolor="#FFFF33" backcolor="#FFFF33">
 					<printWhenExpression><![CDATA[$F{SITUACAO_4} != null && $F{SITUACAO_4}.compareTo(new BigDecimal(1)) == 0]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement mode="Opaque" x="710" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
+				<reportElement mode="Opaque" x="710" y="0" width="60" height="15" forecolor="#FFFF33" backcolor="#FFFF33">
 					<printWhenExpression><![CDATA[$F{SITUACAO_3} != null && $F{SITUACAO_3}.compareTo(new BigDecimal(1)) == 0]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement mode="Opaque" x="531" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
+				<reportElement mode="Opaque" x="531" y="0" width="60" height="15" forecolor="#FFFF33" backcolor="#FFFF33">
 					<printWhenExpression><![CDATA[$F{SITUACAO_2} != null && $F{SITUACAO_2}.compareTo(new BigDecimal(1)) == 0]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<rectangle>
-				<reportElement mode="Opaque" x="351" y="0" width="60" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC">
+				<reportElement mode="Opaque" x="351" y="0" width="60" height="15" forecolor="#FFFF33" backcolor="#FFFF33">
 					<printWhenExpression><![CDATA[$F{SITUACAO_1} != null && $F{SITUACAO_1}.compareTo(new BigDecimal(1)) == 0]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="291" y="0" width="60" height="15"/>
 				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1096,7 +1096,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{QTDCOTADA}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="231" y="0" width="60" height="15"/>
 				<box rightPadding="3">
 					<leftPen lineWidth="0.5"/>
@@ -1106,7 +1106,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECOINI_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="351" y="0" width="60" height="15"/>
 				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1114,7 +1114,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_1}.multiply($F{QTDCOTADA})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="531" y="0" width="60" height="15"/>
 				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1122,7 +1122,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_2}.multiply($F{QTDCOTADA})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="471" y="0" width="60" height="15"/>
 				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1130,7 +1130,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_2}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="411" y="0" width="60" height="15"/>
 				<box rightPadding="3">
 					<leftPen lineWidth="0.5"/>
@@ -1140,7 +1140,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECOINI_2}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="711" y="0" width="60" height="15"/>
 				<box rightPadding="3">
 					<rightPen lineWidth="0.5"/>
@@ -1150,7 +1150,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_3}.multiply($F{QTDCOTADA})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="651" y="0" width="60" height="15"/>
 				<box rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1158,7 +1158,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PRECO_3}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="591" y="0" width="60" height="15"/>
 				<box rightPadding="3">
 					<leftPen lineWidth="0.5"/>
@@ -1213,7 +1213,9 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{ULTCPA_NOMEPARC}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement x="1269" y="0" width="40" height="15"/>
+				<reportElement x="1269" y="0" width="40" height="15">
+					<printWhenExpression><![CDATA[$F{ULTCPA_VLR}.compareTo(BigDecimal.ZERO)!=0]]></printWhenExpression>
+				</reportElement>
 				<box rightPadding="3">
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.5"/>
@@ -1424,7 +1426,7 @@
 				</textElement>
 				<text><![CDATA[V. FINAL TOTAL]]></text>
 			</staticText>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="231" y="81" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1437,7 +1439,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DESC_PARC_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="411" y="66" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1450,7 +1452,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_2}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="591" y="66" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1463,7 +1465,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_3}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="231" y="66" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1476,7 +1478,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="231" y="126" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1489,7 +1491,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_1}.subtract($V{V_TOT_DESC_PARC_1}).add($V{V_TOT_VENC_FRETE_1}).add($V{V_TOT_VENC_DIFAL_1})]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="411" y="81" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1502,7 +1504,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DESC_PARC_2}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="411" y="126" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1515,7 +1517,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_PARC_2}.subtract($V{V_TOT_DESC_PARC_2}).add($V{V_TOT_VENC_FRETE_2}).add($V{V_TOT_VENC_DIFAL_2})]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="591" y="81" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1528,7 +1530,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_DESC_PARC_3}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="591" y="126" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1840,7 +1842,7 @@
 				</textElement>
 				<text><![CDATA[VALOR DIFAL]]></text>
 			</staticText>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="591" y="111" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1853,7 +1855,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_DIFAL_3}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="411" y="111" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1866,7 +1868,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_DIFAL_2}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="231" y="111" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1879,7 +1881,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_DIFAL_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="591" y="96" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1903,7 +1905,7 @@
 				</textElement>
 				<text><![CDATA[VALOR FRETE]]></text>
 			</staticText>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="231" y="96" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -1916,7 +1918,7 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_VENC_FRETE_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="411" y="96" width="180" height="15"/>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
@@ -2180,7 +2182,9 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{V_TOT_ULT_CPA}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Opaque" x="1269" y="0" width="40" height="15" forecolor="#FFFFFF" backcolor="#003366"/>
+				<reportElement mode="Opaque" x="1269" y="0" width="40" height="15" forecolor="#FFFFFF" backcolor="#003366">
+					<printWhenExpression><![CDATA[$V{V_TOT_ULT_CPA}.compareTo(BigDecimal.ZERO)!=0]]></printWhenExpression>
+				</reportElement>
 				<box rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
